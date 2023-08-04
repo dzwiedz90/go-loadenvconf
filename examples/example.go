@@ -15,6 +15,6 @@ type Config struct {
 
 func main() {
 	cfg := Config{}
-	loadenvconf.LoadEnvConfig("dotenv/.env", &cfg)
+	loadenvconf.LoadEnvConfig("loadenvconf/.env", &cfg)
 	fmt.Println(cfg)
 }
