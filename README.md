@@ -1,4 +1,4 @@
-# go-dotenv
+# go-loadenvconf
 
 This is a Go repository to parse from a given file (f.e. .env) and pars it into a given structure.
 It is supposed to parse only string values
@@ -7,7 +7,7 @@ It is supposed to parse only string values
 As a library:
 
 ```shell
-go get github.com/dzwiedz90/go-dotenv
+go get github.com/dzwiedz90/go-loadenvconf
 ```
 
 ## Usage
@@ -25,7 +25,7 @@ package main
 import (
 	"fmt"
 
-	"github.com/dzwiedz90/go-dotenv/dotenv"
+	"github.com/dzwiedz90/go-dotenv/loadenvconf"
 )
 
 type Config struct {
@@ -37,7 +37,7 @@ type Config struct {
 
 func main() {
 	cfg := Config{}
-	dotenv.LoadFromDotEnv("dotenv/.env", &cfg)
+	loadenvconf.LoadEnvConfig("dotenv/.env", &cfg)
 	fmt.Println(cfg)
 }
 ```

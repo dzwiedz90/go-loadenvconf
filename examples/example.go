@@ -3,7 +3,7 @@ package main
 import (
 	"fmt"
 
-	"github.com/dzwiedz90/go-dotenv/dotenv"
+	"github.com/dzwiedz90/go-loadenvconf/loadenvconf"
 )
 
 type Config struct {
@@ -15,6 +15,6 @@ type Config struct {
 
 func main() {
 	cfg := Config{}
-	dotenv.LoadEnvConfig("dotenv/.env", &cfg)
+	loadenvconf.LoadEnvConfig("dotenv/.env", &cfg)
 	fmt.Println(cfg)
 }

@@ -1,4 +1,4 @@
-package dotenv
+package loadenvconf
 
 import (
 	"errors"
