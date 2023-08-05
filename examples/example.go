@@ -11,10 +11,15 @@ type Config struct {
 	DB_NAME     string
 	DB_USER     string
 	DB_PASSWORD string
+	DUPA        string
 }
 
 func main() {
 	cfg := Config{}
-	loadenvconf.LoadEnvConfig("loadenvconf/.env", &cfg)
-	fmt.Println(cfg)
+	_, err := loadenvconf.LoadEnvConfig("loadenvconf/.env", &cfg)
+	if err != nil {
+		fmt.Println(err)
+	} else {
+		fmt.Println(cfg)
+	}
 }

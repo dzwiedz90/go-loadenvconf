@@ -11,10 +11,21 @@ import (
 // LoadEnvConfig takes data from a given file (f.e. .env) and parses it into a given structure.
 // It is supposed to parse only string values
 func LoadEnvConfig(filePath string, structure interface{}) (interface{}, error) {
+	fileInfo, err := os.Stat(filePath)
+	if err != nil {
+		if os.IsNotExist(err) {
+			return nil, fmt.Errorf("file does not exist: %v", filePath)
+		}
+		return nil, fmt.Errorf("error when getting file info: %v", err)
+	}
+
+	if fileInfo.Size() == 0 {
+		return nil, errors.New("file is empty")
+	}
+
 	data, err := os.ReadFile(filePath)
 	if err != nil {
-		fmt.Println("Error when reading from file", err)
-		return nil, err
+		return nil, errors.New("Error when reading from file" + err.Error())
 	}
 
 	envConf := parseEnvConfig(data)
@@ -43,6 +54,9 @@ func LoadEnvConfig(filePath string, structure interface{}) (interface{}, error) 
 
 func parseEnvConfig(data []byte) map[string]string {
 	splitted := strings.Split(string(data), "\n")
+	if len(splitted) == 0 {
+		return nil
+	}
 	envConf := make(map[string]string)
 
 	for i := 0; i < len(splitted); i += 1 {

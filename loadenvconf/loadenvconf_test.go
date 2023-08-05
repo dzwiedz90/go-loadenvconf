@@ -21,13 +21,18 @@ func TestLoadEnvConfig(t *testing.T) {
 		{
 			name:     "ValidData",
 			data:     "USERNAME=johndoe\nPASSWORD=secretpass",
-			filePath: ".test_env",
+			filePath: "testfiles/.test_env",
 			expectedCfg: Config{
 				USERNAME: "JohnDoe",
 				PASSWORD: "p@$$w0rD",
 			},
 		},
-		// Dodaj inne przypadki testowe, jeśli są wymagane
+		{
+			name:        "Empty data",
+			data:        "",
+			filePath:    "testfiles/.empty_test_env",
+			expectedErr: true,
+		},
 	}
 
 	for _, test := range tests {
